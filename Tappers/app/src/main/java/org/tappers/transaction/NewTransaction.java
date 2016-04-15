@@ -19,6 +19,7 @@ import org.tappers.MainActivity;
 import org.tappers.R;
 
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class NewTransaction extends Activity {
@@ -30,13 +31,6 @@ public class NewTransaction extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_transaction);
-
-
-        Calendar cal = Calendar.getInstance();
-
-        yearDate = cal.get(Calendar.YEAR);
-        monthDate = cal.get(Calendar.MONTH);
-        dayDate = cal.get(Calendar.DAY_OF_MONTH);
 
         Button btnAccept = (Button) findViewById(R.id.cmdConfirmTrans);
         Button btnDate = (Button) findViewById(R.id.btnPickNewDateTran);
@@ -71,7 +65,10 @@ public class NewTransaction extends Activity {
         final RadioButton from = (RadioButton) findViewById(R.id.rdbFromTran);
         from.setTypeface(light);
 
-        date.setText("Date Selected: " + dayDate + "/" + (monthDate + 1) + "/" + yearDate);
+        Date d = new Date();
+        java.text.DateFormat dateFormat =
+                android.text.format.DateFormat.getDateFormat(getApplicationContext());
+        date.setText(dateFormat.format(d));
 
 
         btnAccept.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +99,7 @@ public class NewTransaction extends Activity {
 
 
                 MainActivity.contacts.get(getIntent().getIntExtra("pos", 0)).addTransaction(new Transaction(
-                        type, am, date.getText().toString().substring(15),
+                        type, am, date.getText().toString(),
                         reason.getText().toString()));
 
                 Intent returnIntent = getIntent();
@@ -147,8 +144,11 @@ public class NewTransaction extends Activity {
                     yearDate = year;
                     monthDate = monthOfYear + 1;
                     dayDate = dayOfMonth;
+                    Date date = new Date(yearDate,monthDate,dayDate);
+                    java.text.DateFormat dateFormat =
+                            android.text.format.DateFormat.getDateFormat(getApplicationContext());
                     TextView text = (TextView) findViewById(R.id.lblSetDateTran);
-                    text.setText("Date Selected: " + dayDate + "/" + monthDate + "/" + yearDate);
+                    text.setText(dateFormat.format(date));
                 }
             };
 

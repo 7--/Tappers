@@ -21,6 +21,7 @@ import org.tappers.util.ActivityUtils;
 import org.tappers.R;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class NewContact extends Activity {
@@ -332,7 +333,7 @@ public class NewContact extends Activity {
                 returnIntent.putExtra("name", txtContactName.getText().toString());
                 returnIntent.putExtra("transaction", txtTransaction.getText().toString());
                 returnIntent.putExtra("reason", txtReason.getText().toString());
-                returnIntent.putExtra("date", lblDateSelected.getText().toString().substring(15));
+                returnIntent.putExtra("date", lblDateSelected.getText().toString());
                 returnIntent.putExtra("character", characterSelected);
                 returnIntent.putExtra("bgcol", backgroundSelected);
                 returnIntent.putExtra("tofrom", toFrom.toUpperCase());
@@ -368,13 +369,10 @@ public class NewContact extends Activity {
 
     private void initializeDate()
     {
-        Calendar cal = Calendar.getInstance();
-
-        yearDate = cal.get(Calendar.YEAR);
-        monthDate = cal.get(Calendar.MONTH);
-        dayDate = cal.get(Calendar.DAY_OF_MONTH);
-
-        lblDateSelected.setText("Date Selected: " + dayDate +"/" + (monthDate + 1) + "/" + yearDate);
+        Date date = new Date();
+        java.text.DateFormat dateFormat =
+                android.text.format.DateFormat.getDateFormat(getApplicationContext());
+        lblDateSelected.setText(dateFormat.format(date));
     }
 
     @Override
@@ -394,9 +392,11 @@ public class NewContact extends Activity {
                     yearDate = year;
                     monthDate = monthOfYear + 1;
                     dayDate = dayOfMonth;
+                    Date date = new Date(yearDate,monthDate,dayDate);
+                    java.text.DateFormat dateFormat =
+                            android.text.format.DateFormat.getDateFormat(getApplicationContext());
                     TextView text = (TextView) findViewById(R.id.lblSetDate);
-                    System.out.println();
-                    text.setText("Date Selected: " + dayDate + "/" + monthDate + "/" + yearDate);
+                    text.setText(dateFormat.format(date));
                 }
             };
 
