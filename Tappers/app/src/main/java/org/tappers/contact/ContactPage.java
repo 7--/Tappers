@@ -2,18 +2,22 @@ package org.tappers.contact;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +47,7 @@ public class ContactPage extends Activity {
 
     private String name;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +66,7 @@ public class ContactPage extends Activity {
         fonts.put("light", light);
         fonts.put("regular", regular);
 
-        TextView lblBackContacts = (TextView) findViewById(R.id.lblBackContacts);
+        TextView  lblBackContacts = (TextView) findViewById(R.id.lblBackContacts);
         lblBackContacts.setTypeface(fonts.get("regular"));
 
         txtTotal.setTypeface(fonts.get("light"));
@@ -186,6 +191,23 @@ public class ContactPage extends Activity {
         }
 
         transactionListAdapter = new TransactionListAdapter(getApplicationContext(), contact, fonts, this);
+
+        //Send invoice button
+        View listViewFooter = ((LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.list_view_footer, null, false);
+        Button sendInvoiceButton = (Button) listViewFooter.findViewById(R.id.sendInvoice);
+
+        sendInvoiceButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String message = contact.toString();
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Invoice");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, message);
+                startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.share)));
+            }
+        });
+
+        transactionList.addFooterView(listViewFooter);
         transactionList.setAdapter(transactionListAdapter);
     }
 

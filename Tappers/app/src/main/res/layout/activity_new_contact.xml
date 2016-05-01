@@ -81,7 +81,7 @@
                 android:hint="Name"
                 android:capitalize="words"
                 android:layout_height="wrap_content"
-                android:inputType="textPersonName"
+                android:inputType="textPersonName|textCapWords"
                 android:fontFamily="sans-serif-light"
                 android:ems="10"
                 android:id="@+id/txtContactName"

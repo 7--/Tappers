@@ -7,4 +7,14 @@
     <string name="title_activity_contact_page">ContactPage</string>
     <string name="title_activity_new_transaction">NewTransaction</string>
     <string name="title_activity_edit_contact">EditContact</string>
+    <string name="send_invoice">Send Invoice</string>
+    <string name="share">Send Invoice</string>
+    <string name="i_lent_you">"I lent you "</string>
+    <string name="you_lent_me">"You lent me "</string>
+    <string name="we_dont_owe">"We don\'t owe each other anything."</string>
+    <string name="i_owe_you">"I owe you a total of "</string>
+    <string name="you_owe_me">"You owe me a total of "</string>
+    <string name="forr"> " for " </string>
+    <string name="invoice"> "Invoice " </string>
+
 </resources>

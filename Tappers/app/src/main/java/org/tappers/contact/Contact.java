@@ -1,7 +1,11 @@
 package org.tappers.contact;
 
+import android.content.res.Resources;
+
+import org.tappers.R;
 import org.tappers.transaction.Transaction;
 import org.tappers.transaction.TransactionType;
+import org.tappers.util.App;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
@@ -99,6 +103,48 @@ public class Contact implements Serializable
             total = name + " owes you a total of " + formatter.format(Math.abs(value));
         }
 
+    }
+
+    public String toString(){
+        //res used to get Strings
+        Resources res = App.getContext().getResources();
+        double value = 0D;
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        StringBuilder sb = new StringBuilder();
+        sb.append(res.getString(R.string.invoice));
+        sb.append("\n");
+        for(Transaction t : transactions) {
+            sb.append(t.getDate());
+            sb.append("\n");
+            if(t.getType() == TransactionType.FROM) {
+                sb.append(res.getString(R.string.you_lent_me));
+                sb.append(formatter.format(Math.abs(t.getAmount())));
+                if(!"".equals(t.getReason()))
+                    sb.append(res.getString(R.string.forr));
+                sb.append(t.getReason());
+                value -= t.getAmount();
+            }
+            else {
+                sb.append(res.getString(R.string.i_lent_you));
+                sb.append(formatter.format(Math.abs(t.getAmount())));
+                if(!"".equals(t.getReason()))
+                    sb.append(res.getString(R.string.forr));
+                sb.append(t.getReason());
+                value += t.getAmount();
+            }
+            sb.append("\n");
+        }
+        sb.append("\n");
+        if(value == 0) {
+            sb.append(res.getString(R.string.we_dont_owe));
+        }
+        else if(value < 0) {
+            sb.append(res.getString(R.string.i_owe_you) + formatter.format(Math.abs(value)));
+        }
+        else if(value > 0) {
+            sb.append(res.getString(R.string.you_owe_me)  + formatter.format(Math.abs(value)));
+        }
+        return sb.toString();
     }
 
 }
