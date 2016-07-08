@@ -15,7 +15,7 @@ import android.widget.TextView;
 import org.tappers.MainActivity;
 import org.tappers.R;
 import org.tappers.contact.Contact;
-import org.tappers.contact.ContactPage;
+import org.tappers.contact.ContactActivity;
 import org.tappers.transaction.Transaction;
 import org.tappers.transaction.TransactionType;
 
@@ -30,12 +30,12 @@ public class TransactionListAdapter extends BaseAdapter {
 
     private Context context;
     private Contact contact;
-    private ContactPage owner;
+    private ContactActivity owner;
     private static LayoutInflater inflater = null;
     private HashMap<String, Typeface> fonts;
 
     public TransactionListAdapter(Context context, Contact contact
-            , HashMap<String, Typeface> fonts, ContactPage owner)
+            , HashMap<String, Typeface> fonts, ContactActivity owner)
     {
         this.fonts = fonts;
         this.context = context;

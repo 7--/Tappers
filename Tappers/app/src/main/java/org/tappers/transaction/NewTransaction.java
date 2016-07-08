@@ -6,6 +6,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +25,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class NewTransaction extends Activity {
+public class NewTransaction extends AppCompatActivity {
 
 
     private int yearDate, monthDate, dayDate;
@@ -31,6 +34,16 @@ public class NewTransaction extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_transaction);
+        // my_child_toolbar is defined in the layout file
+        Toolbar myChildToolbar =
+                (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myChildToolbar);
+
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
 
         Button btnAccept = (Button) findViewById(R.id.cmdConfirmTrans);
         Button btnDate = (Button) findViewById(R.id.btnPickNewDateTran);

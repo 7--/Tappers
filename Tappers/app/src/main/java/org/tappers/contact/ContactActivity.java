@@ -1,58 +1,57 @@
 package org.tappers.contact;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.ShareActionProvider;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.tappers.MainActivity;
 import org.tappers.transaction.NewTransaction;
 import org.tappers.R;
 import org.tappers.adapter.TransactionListAdapter;
 import org.tappers.util.ActivityUtils;
-
 import java.lang.*;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class ContactPage extends Activity {
+public class ContactActivity extends AppCompatActivity {
 
     private Contact contact;
-
     private HashMap<String, Typeface> fonts;
-
     private ListView transactionList = null;
-
     public TextView txtTotal;
-
     private TransactionListAdapter transactionListAdapter;
-
     private int position;
-
     private String name;
-
+    private String TAG="ContactActivity";
+    private ShareActionProvider shareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_page);
-
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
         txtTotal = (TextView) findViewById(R.id.txtTotal);
 
         fonts = new HashMap<>();
@@ -66,16 +65,12 @@ public class ContactPage extends Activity {
         fonts.put("light", light);
         fonts.put("regular", regular);
 
-        TextView  lblBackContacts = (TextView) findViewById(R.id.lblBackContacts);
-        lblBackContacts.setTypeface(fonts.get("regular"));
 
         txtTotal.setTypeface(fonts.get("light"));
         txtTotal.setText(getIntent().getStringExtra("total"));
 
-        TextView lblTitle = (TextView) findViewById(R.id.contactPageTitle);
         TextView txtHistory = (TextView) findViewById(R.id.txtHistory);
-        lblTitle.setTypeface(fonts.get("light"));
-        lblTitle.setText(getIntent().getStringExtra("name").toString());
+
         txtHistory.setTypeface(fonts.get("light"));
         name = getIntent().getStringExtra("name").toString();
         ImageView characterImageContact = (ImageView) findViewById(R.id.characterImageContact);
@@ -94,8 +89,7 @@ public class ContactPage extends Activity {
 
         charBack.setBackgroundResource(charBackground.getLargeBackground());
 
-        ImageButton btnNewTrans = (ImageButton) findViewById(R.id.btnNewTransaction);
-
+/*
         btnNewTrans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,7 +99,7 @@ public class ContactPage extends Activity {
                 startActivityForResult(intent, 1);
             }
         });
-
+*/
         ImageButton btnClearHistory = (ImageButton) findViewById(R.id.btnClearHistory);
 
         btnClearHistory.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +138,7 @@ public class ContactPage extends Activity {
             }
         });
 
+        /*
         ImageButton btnBack = (ImageButton) findViewById(R.id.btnBackContact);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -155,10 +150,70 @@ public class ContactPage extends Activity {
                 finish();
             }
         });
-
+        */
         updateContactList();
     }
 
+    @Override
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_contact_page, menu);
+        MenuItem menuItem = menu.findItem(R.id.share_invoice);
+        MenuItem menuItem2 = menu.findItem(R.id.new_transaction);
+
+        /*
+        MenuItem menuShare = menu.findItem(R.id.share_invoice);
+        shareActionProvider = new ShareActionProvider(this);
+        MenuItemCompat.setActionProvider(menuShare, shareActionProvider);
+        */
+
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.new_transaction:
+                Intent intent = new Intent(this, NewTransaction.class);
+                intent.putExtra("pos", position);
+                startActivityForResult(intent, 1);
+                return true;
+            case R.id.share_invoice:
+                String message = contact.toString();
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Invoice");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, message);
+                startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.share)));
+            default:
+                return false;
+        }
+    }
+
+    private void setIntent(String text) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, "text");
+        shareActionProvider.setShareIntent(intent);
+    }
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
+            if (menu.getClass().getSimpleName().equals("MenuBuilder")) {
+                try {
+                    Method m = menu.getClass().getDeclaredMethod(
+                            "setOptionalIconsVisible", Boolean.TYPE);
+                    m.setAccessible(true);
+                    m.invoke(menu, true);
+                } catch (NoSuchMethodException e) {
+                    Log.e(TAG, "onMenuOpened", e);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        return super.onMenuOpened(featureId, menu);
+    }
     /**
      * Overriden method speaks with other intents
      * 0 = new Contact
@@ -211,25 +266,6 @@ public class ContactPage extends Activity {
         transactionList.setAdapter(transactionListAdapter);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_contact_page, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
+//

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -18,7 +20,8 @@ import android.widget.Toast;
 
 import org.tappers.adapter.MainListAdapter;
 import org.tappers.contact.Contact;
-import org.tappers.contact.ContactPage;
+
+import org.tappers.contact.ContactActivity;
 import org.tappers.contact.NewContact;
 import org.tappers.transaction.Transaction;
 import org.tappers.transaction.TransactionType;
@@ -30,7 +33,33 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_new_contact);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.action_new_contact:
+                Intent intent = new Intent(this, NewContact.class);
+                ArrayList<String> contactNames = new ArrayList<String>();
+                for (Contact c : contacts) {
+                    contactNames.add(c.name);
+                }
+
+                intent.putStringArrayListExtra("contacts", contactNames);
+                startActivityForResult(intent, ActivityUtils.NEW_CONTACT);
+                return true;
+            default:
+                return false;
+
+        }
+    }
 
     /**
      * All the contacts as a list
@@ -96,6 +125,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
 
         contacts = new ArrayList<>();
         txtTotalOwe = (TextView) findViewById(R.id.txtTotalOwe);
@@ -148,7 +179,7 @@ public class MainActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 int mPos = position;
-                Intent intent = new Intent(view.getContext(), ContactPage.class);
+                Intent intent = new Intent(view.getContext(), ContactActivity.class);
 
                 intent.putExtra("name", contacts.get(position).name);
 

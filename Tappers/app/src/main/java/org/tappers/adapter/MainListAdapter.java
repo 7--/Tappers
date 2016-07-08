@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ import org.tappers.R;
 import org.tappers.contact.Character;
 import org.tappers.contact.CharacterBackground;
 import org.tappers.contact.Contact;
-import org.tappers.contact.ContactPage;
+import org.tappers.contact.ContactActivity;
 
 import org.tappers.util.ActivityUtils;
 
@@ -123,7 +122,7 @@ public class MainListAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 int mPos = position;
-                Intent intent = new Intent(view.getContext(), ContactPage.class);
+                Intent intent = new Intent(view.getContext(), ContactActivity.class);
                 intent.putExtra("name", contacts.get(position).name);
                 Contact c = contacts.get(position);
                 c.setTotalString();
