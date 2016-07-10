@@ -5,13 +5,13 @@
 
     <item android:id="@+id/new_transaction"
         android:title="@string/new_transaction"
-        android:icon="@mipmap/ic_add_to_photos_black_24dp"
+        android:icon="@mipmap/ic_add"
         app:showAsAction="always"
         android:menuCategory="container"
         />
     <item android:id="@+id/share_invoice"
         android:title="@string/send_invoice"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_share"
         app:showAsAction="always"
         android:menuCategory="container"
 

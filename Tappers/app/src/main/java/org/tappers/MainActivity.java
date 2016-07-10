@@ -2,6 +2,7 @@ package org.tappers;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,7 @@ import org.tappers.contact.NewContact;
 import org.tappers.transaction.Transaction;
 import org.tappers.transaction.TransactionType;
 import org.tappers.util.ActivityUtils;
+import org.tappers.util.App;
 import org.tappers.util.LoadHandler;
 import org.tappers.util.SaveHandler;
 
@@ -34,6 +36,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
+
+    Resources res;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -127,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        res= App.getContext().getResources();
 
         contacts = new ArrayList<>();
         txtTotalOwe = (TextView) findViewById(R.id.txtTotalOwe);
@@ -250,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     total -= t.getAmount();
                 }
-                else
+                       else
                 {
                     total += t.getAmount();
                 }
@@ -259,15 +264,15 @@ public class MainActivity extends AppCompatActivity {
 
         if(total < 0)
         {
-            txtTotalOwe.setText("You owe a total of " + formatter.format(Math.abs(total)));
+            txtTotalOwe.setText(res.getString(R.string.owe).concat( formatter.format(Math.abs(total))));
         }
         else if(total > 0)
         {
-            txtTotalOwe.setText("You are owed a total of " + formatter.format(Math.abs(total)));
+            txtTotalOwe.setText(res.getString(R.string.owed).concat(  formatter.format(Math.abs(total))));
         }
         else
         {
-            txtTotalOwe.setText("Nobody owes anyone anything!");
+            txtTotalOwe.setText(res.getString(R.string.youre_whole));
         }
     }
 

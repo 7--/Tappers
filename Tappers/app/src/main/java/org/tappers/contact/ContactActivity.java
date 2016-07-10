@@ -247,22 +247,6 @@ public class ContactActivity extends AppCompatActivity {
 
         transactionListAdapter = new TransactionListAdapter(getApplicationContext(), contact, fonts, this);
 
-        //Send invoice button
-        View listViewFooter = ((LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.list_view_footer, null, false);
-        Button sendInvoiceButton = (Button) listViewFooter.findViewById(R.id.sendInvoice);
-
-        sendInvoiceButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                String message = contact.toString();
-                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-                sharingIntent.setType("text/plain");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Invoice");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, message);
-                startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.share)));
-            }
-        });
-
-        transactionList.addFooterView(listViewFooter);
         transactionList.setAdapter(transactionListAdapter);
     }
 

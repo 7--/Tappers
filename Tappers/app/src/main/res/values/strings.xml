@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">Tab</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_new_contact">New Contact</string>
     <string name="action_settings">Settings</string>
+    <string name="transactions">Transactions</string>
+
+    <string name="from">From </string>
+    <string name="to">To </string>
 
     <string name="title_activity_new_contact">New Contact</string>
     <string name="title_activity_contact_page">Contact</string>
@@ -17,8 +20,16 @@
     <string name="i_owe_you">"I owe you a total of "</string>
     <string name="you_owe_me">"You owe me a total of "</string>
     <string name="forr"> " for " </string>
-    <string name="invoice"> "Invoice " </string>
+    <string name="invoice"> Invoice  </string>
     <string name="new_transaction">New Transaction</string>
+
+    <string name="youre_whole">You\'re whole</string>
+    <string name="owe">You owe\u0020</string>
+    <string name="owed">You are owed\u0020</string>
+    <string name="you_and">You and\u0020</string>
+    <string name="dont_owe_each_other">\u0020don\'t owe each other.</string>
+    <string name="owes_you">\u0020owes you\u0020</string>
 
 
 </resources>
+

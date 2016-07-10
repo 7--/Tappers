@@ -31,6 +31,7 @@ public class Contact implements Serializable
     public String backgroundColour;
 
     public List<Transaction> transactions;
+    public Resources res;
 
     public Contact(String name, String total, String date, String characterType,
                    String backgroundColour, List<Transaction> transactions)
@@ -41,6 +42,7 @@ public class Contact implements Serializable
         this.backgroundColour = backgroundColour;
         this.characterType = characterType;
         this.transactions = transactions;
+        res=App.getContext().getResources();
     }
 
     public Contact(String name, String total, String date, String characterType,
@@ -52,6 +54,8 @@ public class Contact implements Serializable
         this.characterType = characterType;
         this.backgroundColour = backgroundColour;
         this.transactions = null;
+        res=App.getContext().getResources();
+
     }
 
     /**
@@ -92,15 +96,15 @@ public class Contact implements Serializable
 
         if(value == 0)
         {
-            total = "You and " + name + " don't owe each other anything!";
+            total = res.getString(R.string.you_and) + name + res.getString(R.string.dont_owe_each_other);
         }
         else if(value < 0)
         {
-            total = "You owe " + name + " a total of " + formatter.format(Math.abs(value));
+            total = res.getString(R.string.owe) + name + " " + formatter.format(Math.abs(value));
         }
         else if(value > 0)
         {
-            total = name + " owes you a total of " + formatter.format(Math.abs(value));
+            total = name + res.getString(R.string.owes_you) + formatter.format(Math.abs(value));
         }
 
     }
