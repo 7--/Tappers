@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
         if(contacts.size() == 0)
         {
-            txtTotalOwe.setText("Add a new contact by clicking the top right button");
+            txtTotalOwe.setText(R.string.no_contacts);
             return;
         }
         double total = 0;
@@ -345,7 +345,6 @@ public class MainActivity extends AppCompatActivity {
                     {
                         reason = "Reason Unspecific";
                     }
-                    System.out.print("WHYYYYY?");
                     newCon.setTotalString();
                     addContact(newCon);
                     updateContactCount();

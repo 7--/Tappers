@@ -16,41 +16,23 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="New Transaction"
-        android:id="@+id/txtTransactionTitle"
-        android:fontFamily="sans-serif-light"
-        android:textAlignment="gravity"
-        android:gravity="center"
-        android:maxHeight="80dp"
-        android:textSize="25dp"
-        android:maxLines="1"
-        android:minHeight="55dp"
-        android:paddingBottom="5dp"
-        android:minWidth="700dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="#ffffff"
-        android:background="@drawable/title_border" />
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/txtTransactionTitle">
+        android:layout_below="@+id/my_toolbar">
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#0b0c0e"
-                android:text="Transaction Amount"
-                android:textSize="20dp"
+                android:text="@string/amount"
+                android:textSize="20sp"
                 android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
                 android:paddingTop="5dp"
                 android:fontFamily="sans-serif-light"
                 android:id="@+id/lblTransactionTran"
@@ -62,9 +44,10 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
                 android:layout_marginEnd="30dp"
-                android:textSize="14dp"
-                android:hint="17.50"
+                android:textSize="14sp"
+                android:hint="@string/amount_hint"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
                 android:fontFamily="sans-serif-light"
@@ -79,22 +62,25 @@
                 android:layout_toEndOf="@+id/txtTransactionTran"
                 android:layout_toRightOf="@+id/txtTransactionTran"
                 android:layout_marginLeft="-20dp"
+                android:layout_marginStart="-20dp"
                 android:layout_alignTop="@+id/txtTransactionTran"
                 android:paddingRight="10dp"
+                android:paddingEnd="10dp"
                 android:orientation="horizontal">
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="To"
+                    android:text="@string/to"
                     android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:checked="true"
                     android:id="@+id/rdbToTran"/>
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="From"
+                    android:text="@string/from"
                     android:id="@+id/rdbFromTran"
                     android:layout_gravity="right" />
 
@@ -106,9 +92,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtTransactionTran"
                 android:textColor="#0b0c0e"
-                android:text="Reason"
-                android:textSize="20dp"
+                android:text="@string/reason"
+                android:textSize="20sp"
                 android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
                 android:paddingTop="5dp"
                 android:fontFamily="sans-serif-light"
                 android:id="@+id/lblReasonTran"
@@ -121,7 +108,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="30dp"
                 android:textSize="14dp"
-                android:hint="Reason Unspecific"
+                android:hint="@string/reason_hint"
                 android:layout_height="wrap_content"
                 android:inputType="textAutoCorrect"
                 android:fontFamily="sans-serif-light"
@@ -136,9 +123,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtReasonTran"
                 android:textColor="#0b0c0e"
-                android:text="Date"
-                android:textSize="20dp"
+                android:text="@string/date"
+                android:textSize="20sp"
                 android:layout_marginLeft="30dp"
+                android:layout_marginStart="30dp"
                 android:paddingTop="5dp"
                 android:fontFamily="sans-serif-light"
                 android:id="@+id/lblDateTran"
@@ -149,12 +137,13 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="Pick new Date"
+                android:text="@string/select_date"
                 android:layout_marginLeft="10dp"
                 android:fontFamily="sans-serif-light"
                 android:id="@+id/btnPickNewDateTran"
                 android:layout_below="@+id/lblDateTran"
-                android:layout_toEndOf="@+id/lblSetDateTran" />
+                android:layout_toEndOf="@+id/lblSetDateTran"
+                android:layout_toRightOf="@+id/lblSetDateTran"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -167,7 +156,8 @@
                 android:textSize="14dp"
                 android:id="@+id/lblSetDateTran"
                 android:layout_alignTop="@+id/btnPickNewDateTran"
-                android:layout_alignParentStart="true" />
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"/>
 
             <Button
                 android:layout_width="fill_parent"
@@ -176,37 +166,10 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
                 android:layout_below="@+id/btnPickNewDateTran"
-                android:text="Confirm"
+                android:text="@string/confirm"
                 android:id="@+id/cmdConfirmTrans"/>
         </RelativeLayout>
     </ScrollView>
 
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="54.5dp"
-        android:gravity="center"
-        android:layout_marginLeft="25dp"
-        android:textSize="17dp"
-        android:id="@+id/lblBackContactsTransaction"
-        android:text="Contact"
-        android:background="@null"
-        android:fontFamily="sans-serif-light"
-        android:textColor="#FFFFFF" />
-
-    <ImageButton
-        android:layout_width="75dp"
-        android:layout_height="54.5dp"
-        android:id="@+id/btnBackNewTransaction"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:paddingRight="40dp"
-        android:cropToPadding="true"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp"
-        android:src="@drawable/back_arrow"
-        android:layout_above="@+id/txtTotal"
-        android:layout_alignParentTop="true" />
 
 </RelativeLayout>

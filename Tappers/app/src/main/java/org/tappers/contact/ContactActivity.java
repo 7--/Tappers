@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.ShareActionProvider;
@@ -52,6 +53,12 @@ public class ContactActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact_page);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        // Get a support ActionBar corresponding to this toolbar
+        ActionBar ab = getSupportActionBar();
+        // Enable the Up button
+        ab.setDisplayHomeAsUpEnabled(true);
+
+
         txtTotal = (TextView) findViewById(R.id.txtTotal);
 
         fonts = new HashMap<>();
@@ -73,6 +80,7 @@ public class ContactActivity extends AppCompatActivity {
 
         txtHistory.setTypeface(fonts.get("light"));
         name = getIntent().getStringExtra("name").toString();
+        ab.setTitle(name);
         ImageView characterImageContact = (ImageView) findViewById(R.id.characterImageContact);
 
         position = MainActivity.getPositionForContact(getIntent().getStringExtra("name").toString());

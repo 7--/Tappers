@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import org.tappers.MainActivity;
 import org.tappers.R;
+import org.tappers.util.App;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -29,6 +31,7 @@ public class NewTransaction extends AppCompatActivity {
 
 
     private int yearDate, monthDate, dayDate;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class NewTransaction extends AppCompatActivity {
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
 
+        name=MainActivity.contacts.get(getIntent().getIntExtra("pos", 0)).name;
         Button btnAccept = (Button) findViewById(R.id.cmdConfirmTrans);
         Button btnDate = (Button) findViewById(R.id.btnPickNewDateTran);
 
@@ -55,10 +59,10 @@ public class NewTransaction extends AppCompatActivity {
         TextView txtTransactionTran =  (TextView) findViewById(R.id.lblTransactionTran);
         txtTransactionTran.setTypeface(light);
 
-
+        /*
         TextView txtTransactionTitle = (TextView) findViewById(R.id.txtTransactionTitle);
         txtTransactionTitle.setTypeface(light);
-
+         */
         TextView lblReasonTran = (TextView) findViewById(R.id.lblReasonTran);
         lblReasonTran.setTypeface(light);
 
@@ -71,11 +75,13 @@ public class NewTransaction extends AppCompatActivity {
         reason.setTypeface(light);
         final TextView date = (TextView) findViewById(R.id.lblSetDateTran);
         date.setTypeface(light);
-        final TextView back = (TextView) findViewById(R.id.lblBackContactsTransaction);
-        back.setTypeface(regular);
+        //final TextView back = (TextView) findViewById(R.id.lblBackContactsTransaction);
+        //back.setTypeface(regular);
         final RadioButton to = (RadioButton) findViewById(R.id.rdbToTran);
+        to.setText(getResources().getString(R.string.to).concat(name));
         to.setTypeface(light);
         final RadioButton from = (RadioButton) findViewById(R.id.rdbFromTran);
+        from.setText(getResources().getString(R.string.from).concat(name));
         from.setTypeface(light);
 
         Date d = new Date();
@@ -88,8 +94,7 @@ public class NewTransaction extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 double am = 1;
-                try
-                {
+                try {
                     am = Double.parseDouble(amount.getText().toString());
                 }
                 catch(Exception e)
@@ -128,6 +133,7 @@ public class NewTransaction extends AppCompatActivity {
             }
         });
 
+        /*
         ImageButton btnBack = (ImageButton) findViewById(R.id.btnBackNewTransaction);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +144,7 @@ public class NewTransaction extends AppCompatActivity {
                 finish();
             }
         });
+        */
     }
 
     @Override

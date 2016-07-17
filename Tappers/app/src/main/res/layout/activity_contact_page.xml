@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/AppTheme"
     tools:context=".contact.ContactActivity">
 
@@ -9,10 +10,10 @@
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        tools:background="@android:color/holo_blue_dark" />
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -31,7 +32,7 @@
             android:id="@+id/characterImageContact"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:contentDescription="character" />
+            android:contentDescription="@string/image_character" />
     </RelativeLayout>
 
     <ListView
@@ -46,9 +47,9 @@
         android:gravity="center"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="NAME owes you a total of £50.00"
+        android:text=""
         android:fontFamily="sans-serif-light"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="5dp"
         android:id="@+id/txtTotal"
@@ -62,7 +63,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/transactions"
         android:fontFamily="sans-serif-light"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:id="@+id/txtHistory"
@@ -79,10 +80,10 @@
         android:layout_marginTop="6dp"
         android:background="#00000000"
         android:scaleType="fitCenter"
-        android:src="@drawable/bin_history"
+        android:src="@drawable/ic_delete_forever_black_24dp"
         android:layout_alignTop="@+id/txtHistory"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"/>
-
+        android:layout_alignParentRight="true"
+        android:contentDescription="@string/image_clear_all"/>
 
 </RelativeLayout>
