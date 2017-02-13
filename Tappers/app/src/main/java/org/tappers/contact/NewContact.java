@@ -55,7 +55,7 @@ public class NewContact extends AppCompatActivity {
 
     private void resetBackgrounds()
     {
-        charMale.setBackground(null);
+        /*charMale.setBackground(null);
         charFemale.setBackground(null);
         charStonerBob.setBackground(null);
         charGothGirl.setBackground(null);
@@ -64,7 +64,7 @@ public class NewContact extends AppCompatActivity {
         charAbiba.setBackground(null);
         charGamerBob.setBackground(null);
         charBlueDress.setBackground(null);
-        charRedDress.setBackground(null);
+        charRedDress.setBackground(null);*/
     }
 
 
@@ -103,19 +103,19 @@ public class NewContact extends AppCompatActivity {
         Typeface regular = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Regular.ttf");
 
 
-        TextView lblBackContacts = (TextView) findViewById(R.id.lblBackContactsNew);
-        lblBackContacts.setTypeface(regular);
-
-        TextView title = (TextView) findViewById(R.id.contact_title);
+        //TextView lblBackContacts = (TextView) findViewById(R.id.lblBackContactsNew);
+        //lblBackContacts.setTypeface(regular);
+;
+        //TextView title = (TextView) findViewById(R.id.contact_title)
         TextView lblContactName = (TextView) findViewById(R.id.lblContactName);
-        TextView lblTransaction = (TextView) findViewById(R.id.lblTransaction);
+        TextView lblAmount = (TextView) findViewById(R.id.lblAmount);
         TextView lblReason = (TextView) findViewById(R.id.lblReason);
         lblDateSelected = (TextView) findViewById(R.id.lblSetDate);
         TextView lblDate = (TextView) findViewById(R.id.lblDate);
 
         lblContactName.setTypeface(light);
-        title.setTypeface(light);
-        lblTransaction.setTypeface(light);
+        //title.setTypeface(light);
+        lblAmount.setTypeface(light);
         lblReason.setTypeface(light);
         initializeDate();
         lblDateSelected.setTypeface(light);
@@ -147,16 +147,16 @@ public class NewContact extends AppCompatActivity {
 
         txtContactName.setSelected(false);
 
-        ImageButton btnBack = (ImageButton) findViewById(R.id.btnBackNewContact);
+        //ImageButton btnBack = (ImageButton) findViewById(R.id.btnBackNewContact);
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
+       /* btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent returnIntent = getIntent();
                 setResult(-1, returnIntent);
                 finish();
             }
-        });
+        });*/
 
         TextView backgroundLabel = (TextView) findViewById(R.id.lblBackgroundColours);
         backgroundLabel.setTypeface(light);

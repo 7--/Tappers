@@ -24,11 +24,13 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import org.tappers.MainActivity;
 import org.tappers.transaction.NewTransaction;
 import org.tappers.R;
 import org.tappers.adapter.TransactionListAdapter;
 import org.tappers.util.ActivityUtils;
+
 import java.lang.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -44,7 +46,7 @@ public class ContactActivity extends AppCompatActivity {
     private TransactionListAdapter transactionListAdapter;
     private int position;
     private String name;
-    private String TAG="ContactActivity";
+    private String TAG = "ContactActivity";
     private ShareActionProvider shareActionProvider;
 
     @Override
@@ -128,7 +130,7 @@ public class ContactActivity extends AppCompatActivity {
                                 updateContactList();
                                 contact.setTotalString();
                                 txtTotal.setText(contact.total);
-                                MainActivity.save.save();
+                                MainActivity.save.Save();
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
@@ -178,8 +180,9 @@ public class ContactActivity extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_transaction:
                 Intent intent = new Intent(this, NewTransaction.class);
@@ -204,6 +207,7 @@ public class ContactActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_TEXT, "text");
         shareActionProvider.setShareIntent(intent);
     }
+
     @Override
     public boolean onMenuOpened(int featureId, Menu menu) {
         if (featureId == Window.FEATURE_ACTION_BAR && menu != null) {
@@ -222,12 +226,14 @@ public class ContactActivity extends AppCompatActivity {
         }
         return super.onMenuOpened(featureId, menu);
     }
+
     /**
      * Overriden method speaks with other intents
      * 0 = new Contact
+     *
      * @param requestCode - the request coming in
-     * @param resultCode - the result coming in
-     * @param data - the intent data
+     * @param resultCode  - the result coming in
+     * @param data        - the intent data
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -238,21 +244,19 @@ public class ContactActivity extends AppCompatActivity {
                 contact.setTotalString();
                 txtTotal.setText(contact.total);
                 data.putExtra("pos", position);
-                MainActivity.save.save();
+                MainActivity.save.Save();
             }
         }
     }
 
-    public void updateContactList()
-    {
-        for(int i = 0; i < contact.transactions.size(); i++)
-        {
-            if(contact.transactions.get(i).getAmount() == 0)
-            {
-                contact.transactions.remove(i);
+    public void updateContactList() {
+        if(contact.transactions!=null) {
+            for (int i = 0; contact.transactions != null && i < contact.transactions.size(); i++) {
+                if (contact.transactions.get(i).getAmount() == 0) {
+                    contact.transactions.remove(i);
+                }
             }
         }
-
         transactionListAdapter = new TransactionListAdapter(getApplicationContext(), contact, fonts, this);
 
         transactionList.setAdapter(transactionListAdapter);

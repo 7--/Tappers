@@ -34,7 +34,10 @@ import org.tappers.util.SaveHandler;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+//rand chars colors
+//mainact doesnt show amount owed
 
+//new contact datepicker starts at 1900
 public class MainActivity extends AppCompatActivity {
 
     Resources res;
@@ -138,9 +141,9 @@ public class MainActivity extends AppCompatActivity {
         txtContactCount = (TextView) findViewById(R.id.contactCount);
 
         LoadHandler load = new LoadHandler(getApplicationContext());
-        load.load();
+        //load.load();
 
-        contacts = load.getContacts();
+        contacts = load.GetContacts();
         //contacts.clear();
         save = new SaveHandler(getApplicationContext());
         //save.save();
@@ -249,15 +252,13 @@ public class MainActivity extends AppCompatActivity {
         double total = 0;
         for(Contact c : contacts)
         {
-            for(Transaction t : c.transactions)
-            {
-                if(t.getType() == TransactionType.FROM)
-                {
-                    total -= t.getAmount();
-                }
-                       else
-                {
-                    total += t.getAmount();
+            if(c.transactions!=null) {
+                for (Transaction t : c.transactions) {
+                    if (t.getType() == TransactionType.FROM) {
+                        total -= t.getAmount();
+                    } else {
+                        total += t.getAmount();
+                    }
                 }
             }
         }
@@ -287,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
         contacts.add(0, contact);
 
 
-        save.save();
+        save.Save();
 
         customListViewAdapter.notifyDataSetChanged();
 
@@ -381,7 +382,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 SaveHandler saver = new SaveHandler(getApplicationContext());
-                saver.save();
+                saver.Save();
             }
         }
 
@@ -392,4 +393,4 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-}
+                                          }

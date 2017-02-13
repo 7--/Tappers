@@ -17,17 +17,14 @@ import java.util.ArrayList;
 public class SaveHandler {
 
     private String saveString;
-
     public String getSaveString() { return saveString; }
-
     private Context context;
-
     public SaveHandler(Context context)
     {
         this.context = context;
     }
 
-    public void save() {
+    public void Save() {
         generateSaveString();
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(

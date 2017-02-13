@@ -15,72 +15,26 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/new_transaction"
-        android:id="@+id/contact_title"
-        android:fontFamily="sans-serif-light"
-        android:textAlignment="gravity"
-        android:gravity="center"
-        android:maxHeight="80dp"
-        android:textSize="28sp"
-        android:maxLines="1"
-        android:minHeight="55dp"
-        android:paddingBottom="5dp"
-        android:minWidth="700dp"
-        android:layout_alignParentTop="true"
-        android:textColor="#ffffff"
-        android:background="@drawable/title_border"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="54.5dp"
-        android:gravity="center"
-        android:layout_marginLeft="25dp"
-        android:textSize="17dp"
-        android:id="@+id/lblBackContactsNew"
-        android:text="Menu"
-        android:background="@null"
-        android:fontFamily="sans-serif-light"
-        android:textColor="#FFFFFF" />
-
-    <ImageButton
-        android:layout_width="75dp"
-        android:layout_height="54.5dp"
-        android:id="@+id/btnBackNewContact"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:paddingRight="40dp"
-        android:cropToPadding="true"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp"
-        android:src="@drawable/back_arrow"
-        android:layout_above="@+id/txtTotal"
-        android:layout_alignParentTop="true" />
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/contact_title">
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/my_toolbar">
 
         <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#0b0c0e"
-                android:text="Contact Name"
-                android:textSize="18dp"
+                android:text="@string/name"
+                android:textSize="18sp"
+                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:paddingTop="10dp"
                 android:fontFamily="sans-serif-light"
@@ -89,108 +43,119 @@
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_marginRight="10dp"
-                android:textSize="14dp"
-                android:hint="Name"
-                android:capitalize="words"
+                android:layout_marginEnd="10dp"
+                android:textSize="18sp"
+                android:hint="@string/example_name"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName|textCapWords"
                 android:fontFamily="sans-serif-light"
                 android:ems="10"
                 android:id="@+id/txtContactName"
+                android:paddingTop="10dp"
                 android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/lblContactName"
                 android:layout_toEndOf="@+id/lblContactName" />
-
-
-            <TextView
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtContactName"
-                android:textColor="#0b0c0e"
-                android:text="Transaction Amount"
-                android:textSize="18dp"
-                android:layout_marginLeft="10dp"
-                android:paddingTop="5dp"
-                android:fontFamily="sans-serif-light"
-                android:id="@+id/lblTransaction"
-                />
-
-            <EditText
-                android:layout_width="fill_parent"
-                android:layout_marginRight="10dp"
-                android:textSize="14dp"
-                android:hint="0"
-                android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:fontFamily="sans-serif-light"
-                android:ems="10"
-                android:id="@+id/txtTransaction"
-                android:layout_below="@+id/txtContactName"
-                android:layout_toEndOf="@+id/lblTransaction" />
 
 
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/lblTransaction"
-                android:layout_below="@+id/txtTransaction"
-                android:paddingRight="10dp"
+                android:layout_below="@+id/lblContactName"
+                android:paddingTop="10dp"
                 android:id="@+id/radGroup"
                 android:orientation="horizontal">
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="To"
+                    android:text="@string/you_owe_me"
                     android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:checked="true"
                     android:id="@+id/rdbTo"/>
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="From"
+                    android:text="@string/i_owe_you"
                     android:id="@+id/rdbFrom"
-                    android:layout_gravity="right" />
+                    android:layout_gravity="end" />
 
             </RadioGroup>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#0b0c0e"
+                android:text="@string/amount"
+                android:textSize="18sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
+                android:paddingTop="10dp"
+                android:fontFamily="sans-serif-light"
+                android:layout_below="@+id/radGroup"
+                android:id="@+id/lblAmount"
+                />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp"
+                android:paddingTop="10dp"
+                android:textSize="18sp"
+                android:hint="@string/amount_hint"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:fontFamily="sans-serif-light"
+                android:ems="10"
+                android:id="@+id/txtTransaction"
+                android:layout_below="@+id/radGroup"
+                android:layout_toEndOf="@+id/lblAmount"
+                android:layout_toRightOf="@+id/lblAmount"/>
 
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/radGroup"
                 android:textColor="#0b0c0e"
-                android:text="Reason"
-                android:textSize="20dp"
+                android:text="@string/reason"
+                android:textSize="18sp"
                 android:layout_marginLeft="10dp"
-                android:paddingTop="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingTop="10dp"
                 android:fontFamily="sans-serif-light"
+                android:layout_below="@id/lblAmount"
                 android:id="@+id/lblReason"
                 />
 
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_marginRight="10dp"
-                android:textSize="14dp"
-                android:hint="Unspecific Reason"
+                android:layout_marginEnd="10dp"
+                android:textSize="18sp"
+                android:hint="@string/reason_hint"
                 android:layout_height="wrap_content"
                 android:inputType="textAutoCorrect"
                 android:fontFamily="sans-serif-light"
                 android:text=""
                 android:ems="10"
                 android:id="@+id/txtReason"
+                android:paddingTop="10dp"
                 android:layout_alignTop="@+id/lblReason"
-                android:layout_toEndOf="@+id/lblReason" />
+                android:layout_toEndOf="@+id/lblReason"
+                android:layout_toRightOf="@+id/lblReason"/>
 
             <TextView
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtReason"
                 android:textColor="#0b0c0e"
-                android:text="Date"
-                android:textSize="20dp"
+                android:text="@string/date"
+                android:textSize="18sp"
                 android:layout_marginLeft="10dp"
-                android:paddingTop="5dp"
+                android:layout_marginRight="10dp"
+                android:paddingTop="10dp"
                 android:fontFamily="sans-serif-light"
                 android:id="@+id/lblDate"
                 />
@@ -199,54 +164,56 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Pick Date"
+                android:text="@string/select_date"
                 android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:fontFamily="sans-serif-light"
                 android:id="@+id/btnPickNewDate"
                 android:layout_below="@+id/txtReason"
-                android:layout_toEndOf="@+id/lblSetDate" />
+                android:paddingTop="10dp"
+                android:layout_toEndOf="@+id/lblSetDate"
+                android:layout_toRightOf="@+id/lblSetDate" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="44dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:fontFamily="sans-serif-light"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Date Selected: 14/12/2015"
-                android:textSize="14dp"
+                android:textSize="18sp"
                 android:id="@+id/lblSetDate"
                 android:layout_below="@+id/txtReason"
-                android:layout_toEndOf="@+id/lblDate" />
-
-
-
+                android:paddingTop="10dp"
+                android:layout_toEndOf="@+id/lblDate"
+                android:layout_toRightOf="@+id/lblDate"/>
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/lblSetDate"
+                android:layout_below="@+id/btnPickNewDate"
                 android:textColor="#0b0c0e"
-                android:text="Characters..."
-                android:textSize="20dp"
+                android:text="@string/image_character"
+                android:textSize="18sp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:paddingTop="5dp"
                 android:fontFamily="sans-serif-light"
                 android:id="@+id/lblCharacters"
                 android:layout_marginBottom="5dp"
-                android:singleLine="false" />
+                />
 
             <HorizontalScrollView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:id="@+id/backgroundChararcters"
+                android:id="@+id/backgroundCharacters"
                 android:layout_below="@+id/lblCharacters"
                 android:fillViewport="true"
                 android:background="#f1f1f1">
 
 
                 <RelativeLayout
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:focusable="false"
@@ -264,14 +231,16 @@
                         />
 
                     <ImageButton
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:scaleType="fitCenter"
-                    android:background="@null"
-                    android:layout_marginRight="10dp"
-                    android:id="@+id/char_default_female"
-                    android:layout_toEndOf="@+id/char_default_male"
-                    android:src="@drawable/female_small"/>
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:scaleType="fitCenter"
+                        android:background="@null"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:id="@+id/char_default_female"
+                        android:layout_toEndOf="@+id/char_default_male"
+                        android:layout_toRightOf="@+id/char_default_male"
+                        android:src="@drawable/female_small" />
 
                     <ImageButton
                         android:layout_width="75dp"
@@ -279,8 +248,10 @@
                         android:scaleType="fitCenter"
                         android:background="@null"
                         android:layout_marginRight="10dp"
+                        android:layout_marginEnd="10dp"
                         android:id="@+id/char_stoner_bob"
                         android:layout_toEndOf="@+id/char_default_female"
+                        android:layout_toRightOf="@+id/char_default_female"
                         android:src="@drawable/stoner_bob_small"/>
 
                     <ImageButton
@@ -289,9 +260,9 @@
                         android:scaleType="fitCenter"
                         android:background="@null"
                         android:layout_marginRight="10dp"
-
                         android:id="@+id/char_goth_girl"
                         android:layout_toEndOf="@+id/char_stoner_bob"
+                        android:layout_toRightOf="@+id/char_stoner_bob"
                         android:src="@drawable/goth_girl_small"/>
 
 
@@ -301,9 +272,9 @@
                         android:scaleType="fitCenter"
                         android:background="@null"
                         android:layout_marginRight="10dp"
-
                         android:id="@+id/char_red_dress"
                         android:layout_toEndOf="@+id/char_goth_girl"
+                        android:layout_toRightOf="@+id/char_goth_girl"
                         android:src="@drawable/red_dress_female_small"/>
 
                     <ImageButton
@@ -316,6 +287,7 @@
                         android:layout_marginTop="10dp"
                         android:id="@+id/char_stoner_bob_alt"
                         android:layout_toEndOf="@+id/char_red_dress"
+                        android:layout_toRightOf="@+id/char_red_dress"
                         android:src="@drawable/stoner_bob_alt_small"/>
 
                     <ImageButton
@@ -327,6 +299,7 @@
                         android:layout_marginTop="10dp"
                         android:id="@+id/char_abudady"
                         android:layout_toEndOf="@+id/char_stoner_bob_alt"
+                        android:layout_toRightOf="@+id/char_stoner_bob_alt"
                         android:src="@drawable/abudady_small"/>
 
                     <ImageButton
@@ -338,6 +311,7 @@
                         android:layout_marginRight="10dp"
                         android:id="@+id/char_abiba"
                         android:layout_toEndOf="@+id/char_abudady"
+                        android:layout_toRightOf="@+id/char_abudady"
                         android:src="@drawable/abiba_small"/>
 
                     <ImageButton
@@ -349,6 +323,7 @@
                         android:layout_marginRight="10dp"
                         android:id="@+id/char_gamer_bob"
                         android:layout_toEndOf="@+id/char_abiba"
+                        android:layout_toRightOf="@+id/char_abiba"
                         android:src="@drawable/gamer_bob_small"/>
 
 
@@ -361,6 +336,7 @@
                         android:layout_marginRight="10dp"
                         android:id="@+id/char_blue_dress"
                         android:layout_toEndOf="@+id/char_gamer_bob"
+                        android:layout_toRightOf="@+id/char_gamer_bob"
                         android:src="@drawable/blue_dress_female_small"/>
 
                 </RelativeLayout>
@@ -369,11 +345,12 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/backgroundChararcters"
+                android:layout_below="@+id/backgroundCharacters"
                 android:textColor="#0b0c0e"
-                android:text="Background Colour"
-                android:textSize="20dp"
+                android:text="@string/background"
+                android:textSize="18sp"
                 android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:paddingTop="5dp"
                 android:fontFamily="sans-serif-light"
                 android:id="@+id/lblBackgroundColours"
@@ -399,6 +376,7 @@
                         android:layout_height="50dp"
                         android:id="@+id/bgcol_default"
                         android:layout_marginRight="6dp"
+                        android:layout_marginEnd="6dp"
                         android:background="@drawable/bgcol_default"/>
 
                     <ImageButton
@@ -407,7 +385,9 @@
                         android:id="@+id/bgcol_blue"
                         android:background="@drawable/bgcol_blue"
                         android:layout_marginRight="6dp"
-                        android:layout_toEndOf="@+id/bgcol_default" />
+                        android:layout_toEndOf="@+id/bgcol_default"
+                        android:layout_toRightOf="@+id/bgcol_default" />
+
 
                     <ImageButton
                         android:layout_width="50dp"
@@ -415,7 +395,8 @@
                         android:id="@+id/bgcol_green"
                         android:background="@drawable/bgcol_green"
                         android:layout_marginRight="6dp"
-                        android:layout_toEndOf="@+id/bgcol_blue" />
+                        android:layout_toEndOf="@+id/bgcol_blue"
+                        android:layout_toRightOf="@+id/bgcol_blue" />
 
                     <ImageButton
                         android:layout_width="50dp"
@@ -423,7 +404,8 @@
                         android:layout_marginRight="6dp"
                         android:id="@+id/bgcol_turq"
                         android:background="@drawable/bgcol_turq"
-                        android:layout_toEndOf="@+id/bgcol_green" />
+                        android:layout_toEndOf="@+id/bgcol_green"
+                        android:layout_toRightOf="@+id/bgcol_green"/>
 
                     <ImageButton
                         android:layout_width="50dp"
@@ -431,14 +413,17 @@
                         android:layout_marginRight="6dp"
                         android:id="@+id/bgcol_purple"
                         android:background="@drawable/bgcol_purple"
-                        android:layout_toEndOf="@+id/bgcol_turq" />
+                        android:layout_toEndOf="@+id/bgcol_turq"
+                        android:layout_toRightOf="@+id/bgcol_turq"/>
 
                     <ImageButton
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginRight="6dp"
+                        android:layout_marginEnd="6dp"
                         android:id="@+id/bgcol_pink"
                         android:background="@drawable/bgcol_pink"
+                        android:layout_toRightOf="@+id/bgcol_purple"
                         android:layout_toEndOf="@+id/bgcol_purple" />
 
                     <ImageButton
@@ -447,7 +432,8 @@
                         android:layout_marginRight="6dp"
                         android:id="@+id/bgcol_red"
                         android:background="@drawable/bgcol_red"
-                        android:layout_toEndOf="@+id/bgcol_pink" />
+                        android:layout_toEndOf="@+id/bgcol_pink"
+                        android:layout_toRightOf="@+id/bgcol_pink" />
 
                     <ImageButton
                         android:layout_width="50dp"
@@ -455,7 +441,8 @@
                         android:layout_marginRight="6dp"
                         android:id="@+id/bgcol_orange"
                         android:background="@drawable/bgcol_orange"
-                        android:layout_toEndOf="@+id/bgcol_red" />
+                        android:layout_toEndOf="@+id/bgcol_red"
+                        android:layout_toRightOf="@+id/bgcol_red"/>
 
                     <ImageButton
                         android:layout_width="50dp"
@@ -463,7 +450,8 @@
                         android:layout_marginRight="6dp"
                         android:id="@+id/bgcol_gold"
                         android:background="@drawable/bgcol_gold"
-                        android:layout_toEndOf="@+id/bgcol_orange" />
+                        android:layout_toEndOf="@+id/bgcol_orange"
+                        android:layout_toRightOf="@+id/bgcol_orange"/>
 
                     <ImageButton
                         android:layout_width="50dp"
@@ -471,7 +459,8 @@
                         android:layout_marginRight="6dp"
                         android:id="@+id/bgcol_yellow"
                         android:background="@drawable/bgcol_yellow"
-                        android:layout_toEndOf="@+id/bgcol_gold" />
+                        android:layout_toEndOf="@+id/bgcol_gold"
+                        android:layout_toRightOf="@+id/bgcol_gold"/>
 
                     <ImageButton
                         android:layout_width="50dp"
@@ -479,7 +468,8 @@
                         android:layout_marginRight="6dp"
                         android:id="@+id/bgcol_black"
                         android:background="@drawable/bgcol_black"
-                        android:layout_toEndOf="@+id/bgcol_yellow" />
+                        android:layout_toEndOf="@+id/bgcol_yellow"
+                        android:layout_toRightOf="@+id/bgcol_yellow"/>
 
                 </RelativeLayout>
 
@@ -490,17 +480,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:text="Confirm"
+                android:text="@string/confirm"
                 android:id="@+id/cmdConfirm"
                 android:layout_marginBottom="10dp"
                 android:layout_below="@+id/backgroundColours"
                 android:gravity="center"/>
 
         </RelativeLayout>
-
-
-
     </ScrollView>
-
-
 </RelativeLayout>

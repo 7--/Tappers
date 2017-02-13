@@ -6,7 +6,6 @@ import org.tappers.R;
 import org.tappers.transaction.Transaction;
 import org.tappers.transaction.TransactionType;
 import org.tappers.util.App;
-
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -53,7 +52,7 @@ public class Contact implements Serializable
         this.date = date;
         this.characterType = characterType;
         this.backgroundColour = backgroundColour;
-        this.transactions = null;
+        this.transactions = new ArrayList<Transaction>();
         res=App.getContext().getResources();
 
     }
@@ -70,7 +69,6 @@ public class Contact implements Serializable
         transactions.add(0, transaction);
     }
 
-
     /**
      * Gets all transactions, calculates them all and totals up
      * then sets the total string to what the total transaction value is
@@ -79,19 +77,16 @@ public class Contact implements Serializable
     {
         double value = 0D;
 
-        for(Transaction t : transactions)
-        {
-            if(t.getType() == TransactionType.FROM)
-            {
-                value -= t.getAmount();
-            }
-            else
-            {
-                value += t.getAmount();
-            }
+        if(transactions!=null) {
+            for (Transaction t : transactions) {
+                if (t.getType() == TransactionType.FROM) {
+                    value -= t.getAmount();
+                } else {
+                    value += t.getAmount();
+                }
 
+            }
         }
-
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
         if(value == 0)
@@ -117,26 +112,27 @@ public class Contact implements Serializable
         StringBuilder sb = new StringBuilder();
         sb.append(res.getString(R.string.invoice));
         sb.append("\n");
-        for(Transaction t : transactions) {
-            sb.append(t.getDate());
-            sb.append("\n");
-            if(t.getType() == TransactionType.FROM) {
-                sb.append(res.getString(R.string.you_lent_me));
-                sb.append(formatter.format(Math.abs(t.getAmount())));
-                if(!"".equals(t.getReason()))
-                    sb.append(res.getString(R.string.forr));
-                sb.append(t.getReason());
-                value -= t.getAmount();
+        if(transactions!=null) {
+            for (Transaction t : transactions) {
+                sb.append(t.getDate());
+                sb.append("\n");
+                if (t.getType() == TransactionType.FROM) {
+                    sb.append(res.getString(R.string.you_lent_me));
+                    sb.append(formatter.format(Math.abs(t.getAmount())));
+                    if (!"".equals(t.getReason()))
+                        sb.append(res.getString(R.string.forr));
+                    sb.append(t.getReason());
+                    value -= t.getAmount();
+                } else {
+                    sb.append(res.getString(R.string.i_lent_you));
+                    sb.append(formatter.format(Math.abs(t.getAmount())));
+                    if (!"".equals(t.getReason()))
+                        sb.append(res.getString(R.string.forr));
+                    sb.append(t.getReason());
+                    value += t.getAmount();
+                }
+                sb.append("\n");
             }
-            else {
-                sb.append(res.getString(R.string.i_lent_you));
-                sb.append(formatter.format(Math.abs(t.getAmount())));
-                if(!"".equals(t.getReason()))
-                    sb.append(res.getString(R.string.forr));
-                sb.append(t.getReason());
-                value += t.getAmount();
-            }
-            sb.append("\n");
         }
         sb.append("\n");
         if(value == 0) {

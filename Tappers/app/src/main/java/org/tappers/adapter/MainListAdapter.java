@@ -142,7 +142,7 @@ public class MainListAdapter extends BaseAdapter {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
                                 contacts.remove(position);
-                                owner.save.save();
+                                owner.save.Save();
                                 owner.updateContactCount();
                                 notifyDataSetChanged();
                                 owner.generateTotal();

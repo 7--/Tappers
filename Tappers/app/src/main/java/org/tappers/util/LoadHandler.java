@@ -1,6 +1,8 @@
 package org.tappers.util;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import org.tappers.contact.Contact;
@@ -19,24 +21,45 @@ import java.util.ArrayList;
  */
 public class LoadHandler
 {
-
+    private SQLiteDatabase db;
     private ArrayList<Contact> contacts;
 
-    public ArrayList<Contact> getContacts()
+    public ArrayList<Contact> GetContacts()
     {
-        return contacts;
+        Cursor mCursor = db.query("Contact",
+                new String[]{"_id", "FirstName","LastName", "Date","CharacterType","BackgroundColor","PhoneNumber","Email", "ImageResourceId"},
+                null, null, null, null, null);
+        ArrayList<Contact> mArrayList = new ArrayList<Contact>();
+        for(mCursor.moveToFirst(); !mCursor.isAfterLast(); mCursor.moveToNext()) {
+            // The Cursor is now set to the right position
+            Contact c = new Contact(
+                    mCursor.getString(mCursor.getColumnIndex("FirstName")).concat(" ".concat(mCursor.getString(mCursor.getColumnIndex("LastName")))),
+                    "0.00",
+                    mCursor.getString(mCursor.getColumnIndex("Date")),
+                    mCursor.getString(mCursor.getColumnIndex("CharacterType")),
+                    mCursor.getString(mCursor.getColumnIndex("BackgroundColor"))
+                    );
+            mArrayList.add(c);
+        }
+        return mArrayList;
+        //TODO get transactions and give to contact
+        //Contact c = new Contact();
     }
 
     public String loaderString = "";
 
     private Context context;
-
+    public TabDatabaseHelper tabDatabaseHelper;
     public LoadHandler(Context context)
     {
         this.context = context;
+        TabDatabaseHelper tabDatabaseHelper = new TabDatabaseHelper(context);
+        db = tabDatabaseHelper.getReadableDatabase();
+
     }
 
-    public void load()
+
+   /* public void load()
     {
         contacts = new ArrayList<>();
 
@@ -118,7 +141,6 @@ public class LoadHandler
 
             Log.d("abc", "IROOO " + io.toString());
         }
-
     }
-
+*/
 }

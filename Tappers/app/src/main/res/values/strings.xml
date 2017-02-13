@@ -16,6 +16,7 @@
     <string name="date">Date</string>
     <string name="select_date">Select Date</string>
     <string name="confirm">Confirm</string>
+    <string name="background">Background</string>
 
     <string name="image_character">Character</string>
     <string name="image_clear_all">Clear all transactions</string>
@@ -32,17 +33,22 @@
     <string name="i_lent_you">"I lent you "</string>
     <string name="you_lent_me">"You lent me "</string>
     <string name="we_dont_owe">"We don\'t owe each other anything."</string>
-    <string name="i_owe_you">"I owe you a total of "</string>
-    <string name="you_owe_me">"You owe me a total of "</string>
+    <string name="i_owe_you_total">"I owe you a total of "</string>
+    <string name="you_owe_me_total">"You owe me a total of "</string>
+    <string name="you_owe_me">You owe me</string>
+    <string name="i_owe_you">I owe you</string>
     <string name="forr"> " for " </string>
     <string name="invoice"> Invoice  </string>
-
+    <string name="name">Name </string>
+    <string name="example_name">John</string>
     <string name="youre_whole">You\'re whole</string>
     <string name="owe">You owe\u0020</string>
     <string name="owed">You are owed\u0020</string>
     <string name="you_and">You and\u0020</string>
     <string name="dont_owe_each_other">\u0020don\'t owe each other.</string>
     <string name="owes_you">\u0020owes you\u0020</string>
+
+    <string name="contact_name">Name</string>
 
 
 </resources>
